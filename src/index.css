@@ -237,6 +237,36 @@
     transform: translateX(-50%) scale(1);
   }
 
+  /* ── Skeleton Shimmer ── */
+  .skeleton-shimmer {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+  }
+  .skeleton-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(139, 92, 246, 0.12) 50%,
+      rgba(34, 211, 238, 0.07) 55%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    animation: shimmer-sweep 1.8s ease-in-out infinite;
+  }
+  @keyframes shimmer-sweep {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
   /* Reveal Animations */
   .reveal {
     opacity: 0;
