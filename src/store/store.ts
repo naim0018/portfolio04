@@ -1,28 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./features/AuthSlice/authSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import { portfolioApi } from './Api/PortfolioApi';
 
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import baseApi from "./Api/BaseApi/BaseApi";
-
-const persistConfig = {
-  key: "root",
-  storage,
-};
-
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
-    [baseApi.reducerPath]: baseApi.reducer,
-    auth: persistedAuthReducer,
+    [portfolioApi.reducerPath]: portfolioApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }).concat(baseApi.middleware),
+    getDefaultMiddleware().concat(portfolioApi.middleware),
 });
 
-// Define RootState and AppDispatch types
-export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
