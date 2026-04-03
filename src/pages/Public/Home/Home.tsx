@@ -13,16 +13,17 @@ const Testimonials = lazy(() => import("./Components/Testimonials"));
 const Contact = lazy(() => import("./Components/Contact"));
 
 const Home: React.FC = () => {
+
   useEffect(() => {
     // Hide default cursor on desktops
-    document.documentElement.style.cursor = 'none';
-    const allElements = document.querySelectorAll('*');
-    allElements.forEach(el => {
-      (el as HTMLElement).style.cursor = 'none';
+    document.documentElement.style.cursor = "none";
+    const allElements = document.querySelectorAll("*");
+    allElements.forEach((el) => {
+      (el as HTMLElement).style.cursor = "none";
     });
-    
+
     // Add style tag for interactive elements
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.innerHTML = `
       a, button, [role="button"], input, select, textarea, [data-cursor="pointer"] {
         cursor: none !important;
@@ -38,7 +39,8 @@ const Home: React.FC = () => {
     const handleScroll = () => {
       const scrollProgress = document.getElementById("scroll-progress");
       if (scrollProgress) {
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const totalHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
         const progress = (window.scrollY / totalHeight) * 100;
         scrollProgress.style.transform = `scaleX(${progress / 100})`;
       }
@@ -48,7 +50,7 @@ const Home: React.FC = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       document.head.removeChild(style);
-      document.documentElement.style.cursor = 'auto';
+      document.documentElement.style.cursor = "auto";
     };
   }, []);
 
@@ -56,7 +58,7 @@ const Home: React.FC = () => {
     <main className="relative bg-dark-default overflow-x-hidden min-h-screen">
       <CustomCursor />
       <ParticlesBackground />
-      
+
       {/* Scroll Progress Bar */}
       <div id="scroll-progress"></div>
 
